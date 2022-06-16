@@ -12,7 +12,7 @@ const resolvers = {
   },
 
   Mutation: {
-    async createUser(_: any, args: { wallet_address: String }) {
+    async createUser(_: any, args: { wallet_address: String }, { user }: any) {
       try {
         const { wallet_address } = args;
         const user = await new db.User({ wallet_address });
