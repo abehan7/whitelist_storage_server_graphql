@@ -16,7 +16,8 @@ const typeDefs = gql`
     wallet_address: String
   }
   type Mutation {
-    createUser(userInput: UserInput!): User
+    createUser(wallet_address: String!): User
+    deleteUser(wallet_address: String!): User
   }
 `;
 

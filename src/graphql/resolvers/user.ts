@@ -1,5 +1,4 @@
 import { GraphQLArgs } from "graphql";
-import { UserInput } from "../../interfaces";
 import { db } from "../../models";
 const resolvers = {
   Query: {
@@ -13,11 +12,21 @@ const resolvers = {
   },
 
   Mutation: {
-    async createUser(_: any, args: UserInput) {
+    async createUser(_: any, args: { wallet_address: String }) {
       try {
-        const { wallet_address } = args.userInput;
+        const { wallet_address } = args;
         const user = await new db.User({ wallet_address });
         const result = await user.save();
+        return result;
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
+    async deleteUser(_: any, args: { wallet_address: String }) {
+      try {
+        const { wallet_address } = args;
+        const result = await db.User.deleteOne({ wallet_address });
         return result;
       } catch (err) {
         console.log(err);

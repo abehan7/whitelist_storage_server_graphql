@@ -1,6 +1,7 @@
 import express from "express";
 import { ApolloServer, gql } from "apollo-server-express";
 import dotenv from "dotenv";
+import cors from "cors";
 import typeDefs from "./graphql/schema";
 import resolvers from "./graphql/resolvers";
 import { dbConnect } from "./utils";
@@ -10,6 +11,9 @@ const PORT = process.env.PORT || 4000;
 
 const main = async () => {
   const app = express();
+  app.use(cors());
+  app.use(express.json());
+
   await dbConnect();
 
   const server = new ApolloServer({ typeDefs, resolvers });

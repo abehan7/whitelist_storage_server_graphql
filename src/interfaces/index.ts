@@ -1,3 +1,1 @@
-export interface UserInput {
-  userInput: { wallet_address: String };
-}
+export interface IUser {}
