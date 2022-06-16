@@ -7,6 +7,9 @@ const resolvers = {
     ...helloResolvers.Query,
     ...userResolvers.Query,
   },
+  Mutation: {
+    ...userResolvers.Mutation,
+  },
 };
 
 export default resolvers;

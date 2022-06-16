@@ -6,9 +6,8 @@ import resolvers from "./graphql/resolvers";
 import { dbConnect } from "./utils";
 
 dotenv.config({});
+const PORT = process.env.PORT || 4000;
 
-// console.log(DB_USER, DB_PASSWORD, DB_NAME);
-// testEnv();
 const main = async () => {
   const app = express();
   await dbConnect();
@@ -16,9 +15,11 @@ const main = async () => {
   const server = new ApolloServer({ typeDefs, resolvers });
 
   await server.start();
-  server.applyMiddleware({ app, path: "/graphql" });
-  app.listen({ port: 4000 }, () =>
-    console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+  server.applyMiddleware({ app });
+  app.listen({ port: PORT }, () =>
+    console.log(
+      `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+    )
   );
 };
 main();
