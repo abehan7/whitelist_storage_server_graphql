@@ -7,10 +7,10 @@ const typeDefs = gql`
     user(wallet_address: String): User!
   }
   type User {
-    _id: String
+    _id: ID
     wallet_address: String
     createdAt: String
-    isAdmin: String
+    isAdmin: Boolean
   }
   input UserInput {
     wallet_address: String
