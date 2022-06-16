@@ -1,12 +1,11 @@
-// import { dbConnect, testEnv } from "./models/index";
-import mongoose from "mongoose";
-import { ApolloServer, gql } from "apollo-server-express";
-
-import dotenv from "dotenv";
 import express from "express";
+import { ApolloServer, gql } from "apollo-server-express";
+import dotenv from "dotenv";
+import typeDefs from "./graphql/schema";
+import resolvers from "./graphql/resolvers";
 import { dbConnect } from "./utils";
+
 dotenv.config({});
-const { DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 // console.log(DB_USER, DB_PASSWORD, DB_NAME);
 // testEnv();
@@ -14,20 +13,7 @@ const main = async () => {
   const app = express();
   await dbConnect();
 
-  const typeDefs = gql`
-    type Query {
-      hello: String
-    }
-  `;
-
-  const resolver = {
-    Query: {
-      hello: () => "Hello world!",
-    },
-  };
-
-  const server = new ApolloServer({ typeDefs, resolvers: resolver });
-  // mongoose.connect(process.env.CONNECTION_URL!);
+  const server = new ApolloServer({ typeDefs, resolvers });
 
   await server.start();
   server.applyMiddleware({ app, path: "/graphql" });
