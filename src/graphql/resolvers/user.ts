@@ -4,9 +4,14 @@ import { db } from "../../models";
 const resolvers = {
   Query: {
     users: async () => {
-      return [{ _id: "1", wallet_address: "2", createdAt: "3", isAdmin: "4" }];
+      return await db.User.find();
+    },
+
+    user: async (_: any, args: { wallet_address: String }) => {
+      return await db.User.findOne({ wallet_address: args.wallet_address });
     },
   },
+
   Mutation: {
     async createUser(_: any, args: UserInput) {
       try {

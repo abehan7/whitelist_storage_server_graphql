@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     hello: String!
     users: [User!]!
+    user(wallet_address: String): User!
   }
   type User {
     _id: String
