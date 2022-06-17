@@ -10,7 +10,7 @@ const typeDefs = gql`
 
   type Query {
     hello: String!
-    users: [User!]!
+    getAllUsers: [User!]!
     user(wallet_address: String): User!
     authenticate(wallet_address: String): String
   }

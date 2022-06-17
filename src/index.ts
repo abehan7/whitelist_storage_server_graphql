@@ -5,8 +5,6 @@ import cors from "cors";
 import typeDefs from "./graphql/schema";
 import resolvers from "./graphql/resolvers";
 import { dbConnect } from "./utils";
-import { applyMiddleware } from "graphql-middleware";
-import { makeExecutableSchema } from "graphql-tools";
 
 dotenv.config({});
 const PORT = process.env.PORT || 4000;
@@ -17,8 +15,6 @@ const main = async () => {
   app.use(express.json());
 
   await dbConnect();
-
-  const schema = makeExecutableSchema({ typeDefs, resolvers });
 
   // const middleware: any[] = [];
   // const schemaWithMiddleware = applyMiddleware(schema, ...middleware);

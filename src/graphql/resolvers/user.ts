@@ -2,7 +2,7 @@ import { GraphQLArgs } from "graphql";
 import { db } from "../../models";
 const resolvers = {
   Query: {
-    users: async () => {
+    getAllUsers: async () => {
       return await db.User.find();
     },
 
